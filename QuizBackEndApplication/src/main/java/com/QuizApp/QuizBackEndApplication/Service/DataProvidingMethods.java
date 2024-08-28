@@ -42,5 +42,20 @@ public class DataProvidingMethods {
 	}
 		return clist;
 	}
+
+	public Integer validation(List<Integer> id, List<String> ans) {
+		// TODO Auto-generated method stub
+		int i=0;
+		int right=0;
+		for(Integer n:id) {
+	     String res=repo.FindRightAnswers(n);
+	       if(res.equals(ans.get(i)))
+	    	  right++;
+	       
+	       System.out.println(res+" "+ans.get(i));
+	       i++;
+		}
+		return right;
+	}
 	
 }
