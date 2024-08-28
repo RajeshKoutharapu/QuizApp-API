@@ -1,11 +1,13 @@
 package com.QuizApp.QuizBackEndApplication.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.QuizApp.QuizBackEndApplication.Dao.RepoInterface;
+import com.QuizApp.QuizBackEndApplication.Model.coustomQuiz;
 import com.QuizApp.QuizBackEndApplication.Model.questions;
 
 @Service
@@ -28,6 +30,17 @@ public class DataProvidingMethods {
 		// TODO Auto-generated method stub
 		  questions res =repo.save(question);
 		return (res!=null)?"Added SuccesFully":"incorect data Format";
+	}
+
+	public List<coustomQuiz> getcoustomquiz(String cat, Integer num) {
+		// TODO Auto-generated method stub
+		List<questions> list= repo.findQuestionsBynumber(cat, num);
+		List<coustomQuiz> clist=new ArrayList<>();
+		for(questions c:list) {
+			coustomQuiz cm=new coustomQuiz(c.getId(),c.getDificulty(),c.getQuestion(),c.getOption1(),c.getOption2(),c.getOption3(),c.getOption4(),c.getTopic());
+			clist.add(cm);
+	}
+		return clist;
 	}
 	
 }
